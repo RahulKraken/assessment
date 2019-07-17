@@ -1,6 +1,7 @@
 package com.kraken.assesment.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.kraken.assesment.Activities.MovieDetailsActivity;
 import com.kraken.assesment.Models.Movie;
 import com.kraken.assesment.R;
 import com.kraken.assesment.Utils.URLBuilder;
@@ -56,18 +58,28 @@ public class ListMovieRecyclerViewAdapter extends RecyclerView.Adapter<ListMovie
         return movies.size();
     }
 
-    class MovieViewHolder extends RecyclerView.ViewHolder {
+    class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView posterImage;
         TextView title;
         RatingBar ratingBar;
 
-        public MovieViewHolder(@NonNull View itemView) {
+        MovieViewHolder(@NonNull View itemView) {
             super(itemView);
 
             posterImage = itemView.findViewById(R.id.item_poster);
             title = itemView.findViewById(R.id.item_title);
             ratingBar = itemView.findViewById(R.id.item_rating_bar);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Log.d(TAG, "onClick: " + movies.get(getAdapterPosition()).title);
+            Intent intent = new Intent(context, MovieDetailsActivity.class);
+            intent.putExtra(context.getString(R.string.movie_intent_pass_key), movies.get(getAdapterPosition()));
+            context.startActivity(intent);
         }
     }
 }

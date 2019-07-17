@@ -1,5 +1,7 @@
 package com.kraken.assesment.Utils;
 
+import com.kraken.assesment.Models.Movie;
+
 public class URLBuilder {
 
     public static String movieWithGenre(int genre) {
@@ -12,5 +14,13 @@ public class URLBuilder {
 
     public static String imageUrl(String path) {
         return Constants.IMAGE_BASE_URL + path;
+    }
+
+    public static String getMovie(int id) {
+        return Constants.BASE_URL + "/movie/" + id + "?api_key=" + Constants.API_KEY;
+    }
+
+    public static String getReviews(int id) {
+        return Constants.BASE_URL + "/movie/" + id + "/reviews?api_key=" + Constants.API_KEY;
     }
 }
