@@ -23,4 +23,8 @@ public class URLBuilder {
     public static String getReviews(int id) {
         return Constants.BASE_URL + "/movie/" + id + "/reviews?api_key=" + Constants.API_KEY;
     }
+
+    public static String searchMovie(String key) {
+        return Constants.BASE_URL + "/search/movie?query=" + key + "&api_key=" + Constants.API_KEY;
+    }
 }

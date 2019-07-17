@@ -1,5 +1,6 @@
 package com.kraken.assesment.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.android.volley.Request;
@@ -104,7 +105,8 @@ public class ExploreActivity extends AppCompatActivity implements NavigationView
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
-            Toast.makeText(this, "Search btn clicked!!!", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "onOptionsItemSelected: Navigating to search activity");
+            startActivity(new Intent(this, SearchActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
