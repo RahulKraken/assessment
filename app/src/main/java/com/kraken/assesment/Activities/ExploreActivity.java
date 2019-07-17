@@ -13,6 +13,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import android.util.Log;
+import android.view.SubMenu;
 import android.view.View;
 
 import androidx.core.view.GravityCompat;
@@ -21,6 +22,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.kraken.assesment.Adapters.GenreListRecyclerViewAdapter;
 import com.kraken.assesment.Models.Category;
 import com.kraken.assesment.Models.Movie;
@@ -57,6 +59,8 @@ public class ExploreActivity extends AppCompatActivity implements NavigationView
     private static final String TAG = "ExploreActivity";
 
     private RecyclerView recyclerViewMain;
+    private NavigationView navigationView;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +72,7 @@ public class ExploreActivity extends AppCompatActivity implements NavigationView
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -77,6 +81,9 @@ public class ExploreActivity extends AppCompatActivity implements NavigationView
 
         // recycler view stuff
         initRecyclerView();
+
+        // add logout button to nav drawer
+        addLogoutButton();
     }
 
     @Override
@@ -128,8 +135,11 @@ public class ExploreActivity extends AppCompatActivity implements NavigationView
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == 10) {
+            Log.d(TAG, "onNavigationItemSelected: Logout button clicked");
+            firebaseAuth.signOut();
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -152,5 +162,13 @@ public class ExploreActivity extends AppCompatActivity implements NavigationView
 
         recyclerViewMain.setAdapter(adapter);
         recyclerViewMain.setLayoutManager(layoutManager);
+    }
+
+    private void addLogoutButton() {
+        firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser() != null) {
+            Menu menu = navigationView.getMenu();
+            menu.add(0, 10, Menu.NONE, "Logout");
+        }
     }
 }
