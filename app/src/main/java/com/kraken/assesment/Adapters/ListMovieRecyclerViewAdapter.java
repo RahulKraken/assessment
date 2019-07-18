@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.kraken.assesment.Activities.ContainerActivity;
 import com.kraken.assesment.Activities.MovieDetailsActivity;
 import com.kraken.assesment.FirebaseHelpers.DatabasePutService;
 import com.kraken.assesment.Models.Movie;

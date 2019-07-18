@@ -11,8 +11,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/container_recycler_view"
+        android:layout_gravity="center_horizontal|top"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

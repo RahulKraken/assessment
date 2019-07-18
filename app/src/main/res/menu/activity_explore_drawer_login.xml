@@ -18,9 +18,9 @@
             android:icon="@drawable/ic_wishlist"
             android:title="Wishlist" />
         <item
-            android:id="@+id/nav_liked"
+            android:id="@+id/nav_rented"
             android:icon="@drawable/ic_liked"
-            android:title="Liked" />
+            android:title="Rented" />
     </group>
 
     <item android:title="Communicate">

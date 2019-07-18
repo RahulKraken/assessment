@@ -3,18 +3,7 @@ package com.kraken.assesment.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import android.util.Log;
-import android.view.SubMenu;
-import android.view.View;
 
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -25,11 +14,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.kraken.assesment.Adapters.GenreListRecyclerViewAdapter;
 import com.kraken.assesment.Models.Category;
-import com.kraken.assesment.Models.Movie;
 import com.kraken.assesment.R;
 import com.kraken.assesment.Utils.Constants;
-import com.kraken.assesment.Utils.Serializer;
-import com.kraken.assesment.Utils.URLBuilder;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -39,16 +25,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -154,9 +132,9 @@ public class ExploreActivity extends AppCompatActivity implements NavigationView
                 startActivity(intent);
                 break;
 
-            case R.id.nav_liked:
+            case R.id.nav_rented:
                 Log.d(TAG, "onNavigationItemSelected: Likes movies");
-                intent.putExtra(getResources().getString(R.string.action_intent_pass_key), "LIKED");
+                intent.putExtra(getResources().getString(R.string.action_intent_pass_key), "RENTED");
                 startActivity(intent);
                 break;
 
