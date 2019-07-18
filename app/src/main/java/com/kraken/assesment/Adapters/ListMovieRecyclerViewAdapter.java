@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.kraken.assesment.Activities.MovieDetailsActivity;
+import com.kraken.assesment.FirebaseHelpers.DatabasePutService;
 import com.kraken.assesment.Models.Movie;
 import com.kraken.assesment.R;
 import com.kraken.assesment.Utils.URLBuilder;
@@ -77,6 +78,7 @@ public class ListMovieRecyclerViewAdapter extends RecyclerView.Adapter<ListMovie
         @Override
         public void onClick(View view) {
             Log.d(TAG, "onClick: " + movies.get(getAdapterPosition()).title);
+
             Intent intent = new Intent(context, MovieDetailsActivity.class);
             intent.putExtra(context.getString(R.string.movie_intent_pass_key), movies.get(getAdapterPosition()));
             context.startActivity(intent);

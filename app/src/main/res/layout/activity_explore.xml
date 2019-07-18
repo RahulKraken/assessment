@@ -13,14 +13,13 @@
         layout="@layout/app_bar_explore"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-ma
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_explore"
-        app:menu="@menu/activity_explore_drawer" />
+        app:headerLayout="@layout/nav_header_explore" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

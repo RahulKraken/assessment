@@ -66,6 +66,8 @@ public class ExploreActivity extends AppCompatActivity implements NavigationView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
         Log.d(TAG, "onCreate: Explore activity started");
 
         setContentView(R.layout.activity_explore);
@@ -73,6 +75,9 @@ public class ExploreActivity extends AppCompatActivity implements NavigationView
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+
+        inflateNavDrawerMenu();
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -84,6 +89,11 @@ public class ExploreActivity extends AppCompatActivity implements NavigationView
 
         // add logout button to nav drawer
         addLogoutButton();
+    }
+
+    private void inflateNavDrawerMenu() {
+        if (firebaseAuth.getCurrentUser() != null) navigationView.inflateMenu(R.menu.activity_explore_drawer_login);
+        else navigationView.inflateMenu(R.menu.activity_explore_drawer_logout);
     }
 
     @Override
@@ -125,21 +135,49 @@ public class ExploreActivity extends AppCompatActivity implements NavigationView
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        Intent intent = new Intent(this, ContainerActivity.class);
 
-        } else if (id == R.id.nav_slideshow) {
+        switch (id) {
+            case R.id.nav_genre:
+                Log.d(TAG, "onNavigationItemSelected: Expanding ListView.");
+                break;
 
-        } else if (id == R.id.nav_tools) {
+            case R.id.nav_purchased:
+                Log.d(TAG, "onNavigationItemSelected: Purchased movies");
+                intent.putExtra(getResources().getString(R.string.action_intent_pass_key), "PURCHASED");
+                startActivity(intent);
+                break;
 
-        } else if (id == R.id.nav_share) {
+            case R.id.nav_wishlist:
+                Log.d(TAG, "onNavigationItemSelected: Wishlisted movies");
+                intent.putExtra(getResources().getString(R.string.action_intent_pass_key), "WISHLIST");
+                startActivity(intent);
+                break;
 
-        } else if (id == 10) {
-            Log.d(TAG, "onNavigationItemSelected: Logout button clicked");
-            firebaseAuth.signOut();
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
+            case R.id.nav_liked:
+                Log.d(TAG, "onNavigationItemSelected: Likes movies");
+                intent.putExtra(getResources().getString(R.string.action_intent_pass_key), "LIKED");
+                startActivity(intent);
+                break;
+
+            case R.id.nav_share:
+                Log.d(TAG, "onNavigationItemSelected: Sharing");
+                break;
+
+            case R.id.nav_feedback_help:
+                Log.d(TAG, "onNavigationItemSelected: Helping and sending Feedback");
+                break;
+
+            case R.id.nav_settings:
+                Log.d(TAG, "onNavigationItemSelected: Settings");
+                break;
+
+            case 10:
+                Log.d(TAG, "onNavigationItemSelected: Logout button clicked");
+                firebaseAuth.signOut();
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+                break;
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

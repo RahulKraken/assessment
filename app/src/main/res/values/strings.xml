@@ -15,4 +15,6 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
     <string name="movie_intent_pass_key">MOVIE</string>
+    <string name="action_intent_pass_key">ACTION</string>
+    <string name="purchased_key_value">PURCHASED</string>
 </resources>
