@@ -36,7 +36,6 @@ public class ExploreActivity extends AppCompatActivity implements NavigationView
 
     private static final String TAG = "ExploreActivity";
 
-    private RecyclerView recyclerViewMain;
     private NavigationView navigationView;
     private FirebaseAuth firebaseAuth;
 
@@ -124,10 +123,6 @@ public class ExploreActivity extends AppCompatActivity implements NavigationView
         Intent intent = new Intent(this, ContainerActivity.class);
 
         switch (id) {
-            case R.id.nav_genre:
-                Log.d(TAG, "onNavigationItemSelected: Expanding ListView.");
-                break;
-
             case R.id.nav_wishlist:
                 Log.d(TAG, "onNavigationItemSelected: Wishlisted movies");
                 intent.putExtra(getResources().getString(R.string.action_intent_pass_key), "WISHLIST");
@@ -154,7 +149,7 @@ public class ExploreActivity extends AppCompatActivity implements NavigationView
     }
 
     private void initRecyclerView() {
-        recyclerViewMain = findViewById(R.id.recycler_view_main);
+        RecyclerView recyclerViewMain = findViewById(R.id.recycler_view_main);
         List<Category> categories = new ArrayList<>();
 
         for (Map.Entry<String, Integer> entry : Constants.genres.entrySet()) {
