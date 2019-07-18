@@ -33,18 +33,8 @@ public class DatabasePutService {
         });
     }
 
-    public void purchaseMovie(Movie movie) {
-        DatabaseReference purchasedRef = reference.child("purchased").push();
-        purchasedRef.setValue(movie).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                Log.d(TAG, "onComplete: Purchase task completed");
-            }
-        });
-    }
-
-    public void rentMovie(Movie movie) {
-        DatabaseReference rentRef = reference.child("rented").push();
+    public void likeMovie(Movie movie) {
+        DatabaseReference rentRef = reference.child("liked").push();
         rentRef.setValue(movie).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

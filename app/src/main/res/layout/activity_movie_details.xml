@@ -138,27 +138,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <Button
-                    android:id="@+id/detail_btn_rent"
-                    android:text="Rent from Rs.100"
-                    android:background="@color/md_pink_600"
-                    android:textColor="@color/md_white_1000"
-                    android:padding="5dp"
-                    android:layout_marginEnd="4dp"
+                <ImageButton
+                    android:id="@+id/detail_btn_liked"
                     android:layout_weight="1"
+                    android:background="@color/md_grey_100"
+                    android:src="@drawable/ic_liked_border"
+                    android:padding="10dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"/>
 
-                <Button
-                    android:id="@+id/detail_btn_purchase"
-                    android:text="Buy from Rs.250"
-                    android:background="@color/md_pink_600"
-                    android:textColor="@color/md_white_1000"
-                    android:padding="5dp"
-                    android:layout_marginStart="4dp"
+                <ImageButton
+                    android:id="@+id/detail_btn_wishlist"
                     android:layout_weight="1"
+                    android:background="@color/md_grey_100"
+                    android:src="@drawable/ic_wishlist_border"
+                    android:padding="10dp"
+                    android:layout_marginStart="8dp"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 

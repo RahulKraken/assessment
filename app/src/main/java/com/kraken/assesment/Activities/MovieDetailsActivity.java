@@ -3,16 +3,15 @@ package com.kraken.assesment.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +22,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -50,7 +48,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements View.OnCl
     ImageView posterImg;
     TextView tvTitle, tvYear, tvRuntime, tvOverview;
     RatingBar ratingBar;
-    Button btnRent, btnBuy;
+    ImageButton btnLiked, btnWishlist;
     RecyclerView reviewRecyclerView;
 
     // adapters
@@ -84,8 +82,8 @@ public class MovieDetailsActivity extends AppCompatActivity implements View.OnCl
         tvRuntime = findViewById(R.id.detail_runtime);
         tvOverview = findViewById(R.id.detail_overview);
         ratingBar = findViewById(R.id.detail_rating_bar);
-        btnRent = findViewById(R.id.detail_btn_rent);
-        btnBuy = findViewById(R.id.detail_btn_purchase);
+        btnLiked = findViewById(R.id.detail_btn_liked);
+        btnWishlist = findViewById(R.id.detail_btn_wishlist);
         reviewRecyclerView = findViewById(R.id.detail_review_rv);
 
         initRecyclerView();
@@ -93,8 +91,8 @@ public class MovieDetailsActivity extends AppCompatActivity implements View.OnCl
         getMovie();
         getReviews();
 
-        btnBuy.setOnClickListener(this);
-        btnRent.setOnClickListener(this);
+        btnWishlist.setOnClickListener(this);
+        btnLiked.setOnClickListener(this);
     }
 
     @Override
@@ -106,19 +104,13 @@ public class MovieDetailsActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_share:
-                Log.d(TAG, "onOptionsItemSelected: Sharing movie");
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_SUBJECT, movie.title);
-                intent.putExtra(Intent.EXTRA_TEXT, "check out on my new app.\n" + movie.overview);
-                startActivity(Intent.createChooser(intent, "Share via"));
-                break;
-            case R.id.action_wishlist:
-                Log.d(TAG, "onOptionsItemSelected: Adding to wishlist");
-                service.wishlistMovie(movie);
-                break;
+        if (item.getItemId() == R.id.action_share) {
+            Log.d(TAG, "onOptionsItemSelected: Sharing movie");
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_SUBJECT, movie.title);
+            intent.putExtra(Intent.EXTRA_TEXT, "check out on my new app.\n" + movie.overview);
+            startActivity(Intent.createChooser(intent, "Share via"));
         }
         return true;
     }
@@ -126,14 +118,16 @@ public class MovieDetailsActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.detail_btn_purchase:
-                Log.d(TAG, "onClick: Purchasing movie");
-                service.purchaseMovie(movie);
+            case R.id.detail_btn_liked:
+                Log.d(TAG, "onClick: Liked movie");
+                service.likeMovie(movie);
+                btnLiked.setImageResource(R.drawable.ic_liked);
                 break;
 
-            case R.id.detail_btn_rent:
-                Log.d(TAG, "onClick: Renting movie");
-                service.rentMovie(movie);
+            case R.id.detail_btn_wishlist:
+                Log.d(TAG, "onClick: Wishlisted movie");
+                service.wishlistMovie(movie);
+                btnWishlist.setImageResource(R.drawable.ic_wishlist);
                 break;
         }
     }
