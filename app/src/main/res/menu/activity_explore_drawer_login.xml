@@ -10,34 +10,12 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="Genre" />
         <item
-            android:id="@+id/nav_purchased"
-            android:icon="@drawable/ic_purchased"
-            android:title="Purchased" />
-        <item
             android:id="@+id/nav_wishlist"
             android:icon="@drawable/ic_wishlist"
             android:title="Wishlist" />
         <item
-            android:id="@+id/nav_rented"
+            android:id="@+id/nav_liked"
             android:icon="@drawable/ic_liked"
-            android:title="Rented" />
+            android:title="Liked" />
     </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/menu_share" />
-            <item
-                android:id="@+id/nav_feedback_help"
-                android:icon="@drawable/ic_feedback_help"
-                android:title="Help and Feedback" />
-            <item
-                android:id="@+id/nav_settings"
-                android:icon="@drawable/ic_icon_settings"
-                android:title="Settings" />
-        </menu>
-    </item>
-
 </menu>

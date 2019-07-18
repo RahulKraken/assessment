@@ -7,11 +7,22 @@
     android:layout_height="wrap_content"
     android:theme="@style/AppTheme.AppBarOverlay">
 
+    <!--back arrow not showing due to some unresolvable reasons at the moment-->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        style="@style/Widget.AppCompat.Light.ActionBar"
-        app:popupTheme="@style/AppTheme.PopupOverlay" />
+        style="@style/Theme.AppCompat.Light"
+        app:popupTheme="@style/AppTheme.PopupOverlay" >
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:textColor="@color/md_black_1000"
+            android:text="Fun with Movies"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </androidx.appcompat.widget.Toolbar>
 
 </com.google.android.material.appbar.AppBarLayout>

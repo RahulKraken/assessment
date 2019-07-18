@@ -70,6 +70,12 @@ public class MovieDetailsActivity extends AppCompatActivity implements View.OnCl
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         // get movie
         movie = (Movie) getIntent().getSerializableExtra(getResources().getString(R.string.movie_intent_pass_key));
 

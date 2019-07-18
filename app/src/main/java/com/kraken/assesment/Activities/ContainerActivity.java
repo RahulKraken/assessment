@@ -2,6 +2,7 @@ package com.kraken.assesment.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,6 +10,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -31,21 +33,39 @@ public class ContainerActivity extends AppCompatActivity {
     private ListMovieRecyclerViewAdapter adapter;
     private List<Movie> movies;
 
-    private FirebaseAuth firebaseAuth;
-    private FirebaseDatabase database;
-    private DatabaseReference reference;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
-        reference = database.getReference("users").child(firebaseAuth.getCurrentUser().getUid());
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("users").child(firebaseAuth.getCurrentUser().getUid());
 
         setContentView(R.layout.activity_container);
 
         String action = getIntent().getStringExtra(getResources().getString(R.string.action_intent_pass_key));
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            TextView toolbarTitle = findViewById(R.id.toolbar_title);
+            if (action != null) {
+                switch (action) {
+                    case "LIKED":
+                        toolbarTitle.setText("Liked");
+                        break;
+                    case "WISHLIST":
+                        toolbarTitle.setText("Wishlist");
+                        break;
+                }
+            } else {
+                toolbarTitle.setText("PLACEHOLDER TEXT");
+            }
+        }
 
         recyclerView = findViewById(R.id.container_recycler_view);
         movies = new ArrayList<>();
@@ -53,17 +73,13 @@ public class ContainerActivity extends AppCompatActivity {
 
         if (action != null) {
             switch (action) {
-                case "PURCHASED":
-                    Log.d(TAG, "onCreate: PURCHASED");
-                    getResults(reference.child("purchased"));
-                    break;
                 case "WISHLIST":
                     Log.d(TAG, "onCreate: WISHLIST");
                     getResults(reference.child("wishlist"));
                     break;
-                case "RENTED":
-                    Log.d(TAG, "onCreate: RENTED");
-                    getResults(reference.child("rented"));
+                case "LIKED":
+                    Log.d(TAG, "onCreate: LIKED");
+                    getResults(reference.child("liked"));
                     break;
             }
         }

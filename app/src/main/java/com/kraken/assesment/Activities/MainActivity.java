@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(MainActivity.this, ExploreActivity.class));
                 } else {
                     startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(), 1);
+                    finish();
                 }
             }
         }, 1000);
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 1 && firebaseAuth.getCurrentUser() != null) {
             Log.d(TAG, "onActivityResult: Signed up successfully");
             startActivity(new Intent(this, ExploreActivity.class));
+            finish();
         }
     }
 }

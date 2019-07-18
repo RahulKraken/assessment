@@ -25,14 +25,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class ExploreActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    // base URL - https://api.themoviedb.org/3/movie/550?api_key=e72b4559ffdb15dbb9c5de5c94948f25
 
     private static final String TAG = "ExploreActivity";
 
@@ -51,6 +51,11 @@ public class ExploreActivity extends AppCompatActivity implements NavigationView
         setContentView(R.layout.activity_explore);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
 
@@ -64,6 +69,9 @@ public class ExploreActivity extends AppCompatActivity implements NavigationView
 
         // recycler view stuff
         initRecyclerView();
+
+        // handle nav header
+        handleNavHeader();
 
         // add logout button to nav drawer
         addLogoutButton();
@@ -120,34 +128,16 @@ public class ExploreActivity extends AppCompatActivity implements NavigationView
                 Log.d(TAG, "onNavigationItemSelected: Expanding ListView.");
                 break;
 
-            case R.id.nav_purchased:
-                Log.d(TAG, "onNavigationItemSelected: Purchased movies");
-                intent.putExtra(getResources().getString(R.string.action_intent_pass_key), "PURCHASED");
-                startActivity(intent);
-                break;
-
             case R.id.nav_wishlist:
                 Log.d(TAG, "onNavigationItemSelected: Wishlisted movies");
                 intent.putExtra(getResources().getString(R.string.action_intent_pass_key), "WISHLIST");
                 startActivity(intent);
                 break;
 
-            case R.id.nav_rented:
+            case R.id.nav_liked:
                 Log.d(TAG, "onNavigationItemSelected: Likes movies");
-                intent.putExtra(getResources().getString(R.string.action_intent_pass_key), "RENTED");
+                intent.putExtra(getResources().getString(R.string.action_intent_pass_key), "LIKED");
                 startActivity(intent);
-                break;
-
-            case R.id.nav_share:
-                Log.d(TAG, "onNavigationItemSelected: Sharing");
-                break;
-
-            case R.id.nav_feedback_help:
-                Log.d(TAG, "onNavigationItemSelected: Helping and sending Feedback");
-                break;
-
-            case R.id.nav_settings:
-                Log.d(TAG, "onNavigationItemSelected: Settings");
                 break;
 
             case 10:
@@ -186,5 +176,11 @@ public class ExploreActivity extends AppCompatActivity implements NavigationView
             Menu menu = navigationView.getMenu();
             menu.add(0, 10, Menu.NONE, "Logout");
         }
+    }
+
+    private void handleNavHeader() {
+        View view = navigationView.getHeaderView(0);
+        TextView email = view.findViewById(R.id.nav_header_email);
+        if (firebaseAuth.getCurrentUser() != null) email.setText(firebaseAuth.getCurrentUser().getEmail());
     }
 }

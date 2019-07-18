@@ -39,7 +39,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private EditText et_Search;
 
     private SearchRecyclerViewAdapter adapter;
-    private RecyclerView recyclerView;
     private List<Movie> movies;
 
     @Override
@@ -110,7 +109,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void initRecyclerView() {
-        recyclerView = findViewById(R.id.search_recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.search_recycler_view);
         recyclerView.setAdapter(adapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);

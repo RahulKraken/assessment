@@ -12,9 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.ContainerActivity"></activity>
-        <activity android:name=".Activities.SearchActivity" />
-        <activity android:name=".Activities.MovieDetailsActivity" />
+        <activity android:name=".Activities.ContainerActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".Activities.ExploreActivity"/>
+        <activity android:name=".Activities.SearchActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".Activities.ExploreActivity"/>
+        <activity android:name=".Activities.MovieDetailsActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".Activities.ExploreActivity"/>
         <activity
             android:name=".Activities.ExploreActivity"
             android:label="@string/title_activity_explore"
